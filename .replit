@@ -1,0 +1,28 @@
+modules = ["java"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Java Web Server"
+
+[[workflows.workflow]]
+name = "Java Web Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "javac -cp \".:lib/*\" CalculatorServlet.java && java -cp \".:lib/*:$JAVA_HOME/lib/*\" -Djava.awt.headless=true org.eclipse.jetty.server.Server"
+waitForPort = 5000
+
+[deployment]
+run = ["sh", "-c", "javac -cp \".:lib/*\" CalculatorServlet.java && java -cp \".:lib/*:$JAVA_HOME/lib/*\" -Djava.awt.headless=true org.eclipse.jetty.server.Server"]
