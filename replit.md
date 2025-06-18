@@ -79,7 +79,8 @@ The application uses embedded Tomcat server for deployment:
 
 ## Changelog
 
-- June 18, 2025. Initial setup
+- June 18, 2025: Initial setup
+- June 18, 2025: Created complete static website version using only HTML, CSS, JavaScript, and JSP files as requested by user. Removed server dependencies for pure client-side functionality.
 
 ## User Preferences
 
