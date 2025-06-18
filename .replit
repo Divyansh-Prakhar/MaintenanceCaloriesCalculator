@@ -1,4 +1,4 @@
-modules = ["java"]
+modules = ["java", "java-17", "nodejs-20"]
 
 [nix]
 channel = "stable-24_05"
@@ -13,16 +13,20 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Java Web Server"
+args = "Node.js Web Server"
 
 [[workflows.workflow]]
-name = "Java Web Server"
+name = "Node.js Web Server"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "javac -cp \".:lib/*\" CalculatorServlet.java && java -cp \".:lib/*:$JAVA_HOME/lib/*\" -Djava.awt.headless=true org.eclipse.jetty.server.Server"
+args = "node server.js"
 waitForPort = 5000
 
 [deployment]
-run = ["sh", "-c", "javac -cp \".:lib/*\" CalculatorServlet.java && java -cp \".:lib/*:$JAVA_HOME/lib/*\" -Djava.awt.headless=true org.eclipse.jetty.server.Server"]
+run = ["sh", "-c", "javac WebServer.java && java WebServer"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
