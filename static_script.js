@@ -245,7 +245,6 @@ function displayResults(results) {
     displayCalorieResults(results);
     displayWorkoutResults(results);
     displayMacroResults(results);
-    createCharts(results);
     resultsSection.style.display = 'block';
 }
 
@@ -400,145 +399,97 @@ function displayMacroResults(results) {
     `;
 }
 
-// Create charts
-function createCharts(results) {
-    createCalorieChart(results);
-    createMacroChart(results);
-}
-
-// Create calorie breakdown chart
-function createCalorieChart(results) {
-    const ctx = document.getElementById('calorieChart').getContext('2d');
-    
-    if (calorieChart) {
-        calorieChart.destroy();
-    }
-
-    calorieChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['BMR', 'Activity Calories'],
-            datasets: [{
-                data: [results.bmr, results.maintenanceCalories - results.bmr],
-                backgroundColor: ['#3498db', '#e74c3c'],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                },
-                title: {
-                    display: true,
-                    text: 'Calorie Breakdown'
-                }
-            }
-        }
-    });
-}
-
-// Create macro distribution chart
-function createMacroChart(results) {
-    const ctx = document.getElementById('macroChart').getContext('2d');
-    
-    if (macroChart) {
-        macroChart.destroy();
-    }
-
-    macroChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Protein', 'Carbohydrates', 'Fats'],
-            datasets: [{
-                data: [
-                    results.macros.protein.percentage,
-                    results.macros.carbs.percentage,
-                    results.macros.fat.percentage
-                ],
-                backgroundColor: ['#dc3545', '#ffc107', '#28a745'],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                },
-                title: {
-                    display: true,
-                    text: 'Macro Distribution'
-                }
-            }
-        }
-    });
-}
-
-// Utility functions
+// Get BMI category
 function getBMICategory(bmi) {
-    if (bmi < 18.5) return 'Underweight';
-    if (bmi < 25) return 'Normal weight';
-    if (bmi < 30) return 'Overweight';
-    return 'Obese';
+    if (bmi < 18.5) return "Underweight";
+    if (bmi < 25) return "Normal weight";
+    if (bmi < 30) return "Overweight";
+    return "Obese";
 }
 
+// Form validation functions
 function validateForm() {
-    const form = document.getElementById('calorieForm');
-    return form.checkValidity();
+    const height = parseFloat(document.getElementById('height').value);
+    const weight = parseFloat(document.getElementById('weight').value);
+    const age = parseFloat(document.getElementById('age').value);
+    const gender = document.getElementById('gender').value;
+    const activityLevel = parseFloat(document.getElementById('activityLevel').value);
+    const days = parseInt(document.getElementById('days').value);
+    const hours = parseFloat(document.getElementById('hours').value);
+
+    if (!height || height < 100 || height > 250) {
+        showError('Please enter a valid height between 100 and 250 cm.');
+        return false;
+    }
+    if (!weight || weight < 30 || weight > 300) {
+        showError('Please enter a valid weight between 30 and 300 kg.');
+        return false;
+    }
+    if (!age || age < 15 || age > 100) {
+        showError('Please enter a valid age between 15 and 100 years.');
+        return false;
+    }
+    if (!gender) {
+        showError('Please select your gender.');
+        return false;
+    }
+    if (!activityLevel) {
+        showError('Please select your activity level.');
+        return false;
+    }
+    if (!days || days < 1 || days > 7) {
+        showError('Please enter valid days available (1-7).');
+        return false;
+    }
+    if (!hours || hours < 0.5 || hours > 4) {
+        showError('Please enter valid hours per day (0.5-4).');
+        return false;
+    }
+
+    return true;
 }
 
 function validateField(event) {
     const field = event.target;
-    if (field.checkValidity()) {
-        field.classList.remove('is-invalid');
-        field.classList.add('is-valid');
-    } else {
-        field.classList.remove('is-valid');
+    const value = field.value;
+    
+    if (field.hasAttribute('required') && !value) {
         field.classList.add('is-invalid');
+        return false;
     }
+    
+    field.classList.remove('is-invalid');
+    field.classList.add('is-valid');
+    return true;
 }
 
 function clearValidationOnType(event) {
     const field = event.target;
-    field.classList.remove('is-valid', 'is-invalid');
+    field.classList.remove('is-invalid', 'is-valid');
 }
 
+// Utility functions
 function showLoadingState() {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Calculating...';
-    form.classList.add('loading');
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Calculating...';
 }
 
 function hideLoadingState() {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = false;
     submitBtn.innerHTML = '<i class="fas fa-calculator me-2"></i>Calculate My Calories & Get Workout Plan';
-    form.classList.remove('loading');
 }
 
 function showError(message) {
-    const alertHtml = `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa-exclamation-triangle me-2"></i>
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    `;
-    form.insertAdjacentHTML('beforebegin', alertHtml);
+    alert(message); // Simple alert for now - could be enhanced with a toast notification
 }
 
 function scrollToResults() {
-    setTimeout(() => {
-        resultsSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }, 300);
+    resultsSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
 }
 
 function scrollToCalculator() {
@@ -547,74 +498,3 @@ function scrollToCalculator() {
         block: 'start'
     });
 }
-
-// Additional CSS for dynamic content
-const additionalStyles = `
-    .stat-box {
-        text-align: center;
-        padding: 1rem;
-        border-radius: 10px;
-        background: #f8f9fa;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-    }
-    
-    .stat-label {
-        font-weight: 600;
-        color: #495057;
-    }
-    
-    .mini-stat {
-        padding: 0.75rem;
-        border-radius: 8px;
-        text-align: center;
-    }
-    
-    .macro-card {
-        padding: 1.5rem;
-    }
-    
-    .macro-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        font-size: 1.5rem;
-    }
-    
-    .macro-amount {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #495057;
-    }
-    
-    .target-calories {
-        text-align: center;
-        padding: 1.5rem;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 15px;
-    }
-    
-    .workout-plan {
-        height: 100%;
-    }
-    
-    .workout-tips {
-        margin-top: 1.5rem;
-        padding: 1rem;
-        background: #f8f9fa;
-        border-radius: 8px;
-    }
-`;
-
-// Inject additional styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);

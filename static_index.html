@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="static_style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -263,7 +263,7 @@
         </div>
     </section>
 
-    <!-- Results Section -->
+    <!-- Results Section (Hidden by default) -->
     <div id="results-section" class="py-5 bg-light" style="display: none;">
         <div class="container">
             <div class="row justify-content-center">
@@ -282,13 +282,8 @@
                                         <i class="fas fa-fire me-2"></i>Calorie Breakdown
                                     </h5>
                                 </div>
-                                <div class="card-body">
-                                    <div id="calorie-results">
-                                        <!-- Results will be populated by JavaScript -->
-                                    </div>
-                                    <div class="mt-4">
-                                        <canvas id="calorieChart" width="400" height="200"></canvas>
-                                    </div>
+                                <div class="card-body" id="calorie-results">
+                                    <!-- Results will be populated by JavaScript -->
                                 </div>
                             </div>
                         </div>
@@ -298,39 +293,36 @@
                             <div class="result-card shadow-sm h-100">
                                 <div class="card-header bg-success text-white">
                                     <h5 class="mb-0">
-                                        <i class="fas fa-dumbbell me-2"></i>Workout Plan
+                                        <i class="fas fa-dumbbell me-2"></i>Recommended Workout Plan
                                     </h5>
                                 </div>
-                                <div class="card-body">
-                                    <div id="workout-results">
-                                        <!-- Results will be populated by JavaScript -->
-                                    </div>
+                                <div class="card-body" id="workout-results">
+                                    <!-- Results will be populated by JavaScript -->
                                 </div>
                             </div>
                         </div>
 
                         <!-- Macronutrient Breakdown -->
-                        <div class="col-12 mt-4">
+                        <div class="col-12">
                             <div class="result-card shadow-sm">
                                 <div class="card-header bg-info text-white">
                                     <h5 class="mb-0">
-                                        <i class="fas fa-chart-pie me-2"></i>Macronutrient Distribution
+                                        <i class="fas fa-utensils me-2"></i>Daily Macronutrient Targets
                                     </h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div id="macro-results" class="row g-3">
-                                                <!-- Macro results will be populated by JavaScript -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <canvas id="macroChart" width="300" height="300"></canvas>
-                                        </div>
+                                    <div class="row" id="macro-results">
+                                        <!-- Results will be populated by JavaScript -->
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button class="btn btn-accent btn-lg rounded-pill px-5" onclick="scrollToCalculator()">
+                            <i class="fas fa-calculator me-2"></i>Calculate Again
+                        </button>
                     </div>
                 </div>
             </div>
@@ -341,98 +333,83 @@
     <section id="diet-info" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Diet Information</h2>
-                <p class="lead text-muted">Explore different diet approaches to achieve your goals</p>
+                <h2 class="display-5 fw-bold mb-3">Popular Diet Types</h2>
+                <p class="lead text-muted">Understand different nutrition approaches to reach your goals</p>
             </div>
 
             <div class="row g-4">
-                <div class="col-lg-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="diet-card shadow-sm h-100">
                         <div class="diet-icon">
-                            <i class="fas fa-leaf"></i>
+                            <i class="fas fa-bacon"></i>
                         </div>
-                        <h4 class="text-primary">Ketogenic Diet</h4>
-                        <p class="text-muted">
-                            A high-fat, low-carb diet that induces ketosis, helping your body burn fat for fuel instead of carbohydrates.
-                        </p>
+                        <h5 class="fw-bold">Keto Diet</h5>
+                        <p class="text-muted">High-fat, low-carb diet that aims to induce ketosis for fat burning.</p>
                         <div class="diet-sources">
                             <h6>Food Sources:</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Meat</span>
-                                <span class="badge bg-light text-dark">Fish</span>
-                                <span class="badge bg-light text-dark">Eggs</span>
-                                <span class="badge bg-light text-dark">Cheese</span>
-                                <span class="badge bg-light text-dark">Nuts</span>
-                                <span class="badge bg-light text-dark">Avocados</span>
-                            </div>
+                            <ul class="small">
+                                <li>Meat, fish, eggs</li>
+                                <li>Butter, cheese, nuts</li>
+                                <li>Avocados, seeds</li>
+                                <li>Low-carb vegetables</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="diet-card shadow-sm h-100">
                         <div class="diet-icon">
                             <i class="fas fa-bread-slice"></i>
                         </div>
-                        <h4 class="text-warning">High-Carb Diet</h4>
-                        <p class="text-muted">
-                            A diet with higher carbohydrate proportions, ideal for athletes and those with high energy demands.
-                        </p>
+                        <h5 class="fw-bold">High-Carb Diet</h5>
+                        <p class="text-muted">Higher proportion of carbohydrates for energy and performance.</p>
                         <div class="diet-sources">
                             <h6>Food Sources:</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Oats</span>
-                                <span class="badge bg-light text-dark">Quinoa</span>
-                                <span class="badge bg-light text-dark">Brown Rice</span>
-                                <span class="badge bg-light text-dark">Fruits</span>
-                                <span class="badge bg-light text-dark">Legumes</span>
-                                <span class="badge bg-light text-dark">Potatoes</span>
-                            </div>
+                            <ul class="small">
+                                <li>Whole grains (oats, quinoa)</li>
+                                <li>Fruits and vegetables</li>
+                                <li>Legumes (beans, lentils)</li>
+                                <li>Potatoes, rice</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="diet-card shadow-sm h-100">
                         <div class="diet-icon">
-                            <i class="fas fa-apple-alt"></i>
+                            <i class="fas fa-leaf"></i>
                         </div>
-                        <h4 class="text-success">Low-Carb Diet</h4>
-                        <p class="text-muted">
-                            Restricts carbohydrate intake for weight loss and blood sugar control while maintaining protein and fat intake.
-                        </p>
+                        <h5 class="fw-bold">Low-Carb Diet</h5>
+                        <p class="text-muted">Restricts carbohydrate intake for weight loss and blood sugar control.</p>
                         <div class="diet-sources">
                             <h6>Food Sources:</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Leafy Greens</span>
-                                <span class="badge bg-light text-dark">Broccoli</span>
-                                <span class="badge bg-light text-dark">Meat</span>
-                                <span class="badge bg-light text-dark">Fish</span>
-                                <span class="badge bg-light text-dark">Nuts</span>
-                                <span class="badge bg-light text-dark">Berries</span>
-                            </div>
+                            <ul class="small">
+                                <li>Non-starchy vegetables</li>
+                                <li>Meat, fish, eggs</li>
+                                <li>Nuts and seeds</li>
+                                <li>Berries (in moderation)</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="diet-card shadow-sm h-100">
                         <div class="diet-icon">
                             <i class="fas fa-clock"></i>
                         </div>
-                        <h4 class="text-info">Intermittent Fasting</h4>
-                        <p class="text-muted">
-                            Cycling between periods of eating and fasting, with popular methods like 16:8 or 18:6 fasting windows.
-                        </p>
+                        <h5 class="fw-bold">Intermittent Fasting</h5>
+                        <p class="text-muted">Cycling between periods of eating and fasting (e.g., 16:8 method).</p>
                         <div class="diet-sources">
                             <h6>During Eating Windows:</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Lean Protein</span>
-                                <span class="badge bg-light text-dark">Healthy Fats</span>
-                                <span class="badge bg-light text-dark">Vegetables</span>
-                                <span class="badge bg-light text-dark">Fruits</span>
-                                <span class="badge bg-light text-dark">Whole Grains</span>
-                            </div>
+                            <ul class="small">
+                                <li>Lean protein sources</li>
+                                <li>Healthy fats</li>
+                                <li>Fruits and vegetables</li>
+                                <li>Balanced meals</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -440,151 +417,117 @@
         </div>
     </section>
 
-    <!-- Protein Foods Section -->
+    <!-- High-Protein Foods Section -->
     <section id="protein-foods" class="py-5 bg-light">
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="display-5 fw-bold mb-3">High-Protein Foods</h2>
-                <p class="lead text-muted">Essential protein sources for your fitness journey</p>
+                <p class="lead text-muted">Essential protein sources for muscle building and recovery</p>
             </div>
 
             <div class="row g-4">
-                <!-- Vegetarian Sources -->
                 <div class="col-lg-6">
-                    <div class="protein-card shadow-sm">
-                        <div class="protein-header bg-success">
-                            <h4 class="text-white mb-0">
+                    <div class="protein-card shadow-sm h-100">
+                        <div class="protein-header bg-success text-white">
+                            <h5 class="mb-0">
                                 <i class="fas fa-seedling me-2"></i>Vegetarian Sources
-                            </h4>
+                            </h5>
                         </div>
                         <div class="protein-body">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Lentils</strong>
-                                        <small>18g protein per cup</small>
-                                    </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-success me-2"></i>
+                                <div>
+                                    <strong>Lentils</strong>
+                                    <small>Great source of protein and fiber</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Chickpeas</strong>
-                                        <small>15g protein per cup</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-success me-2"></i>
+                                <div>
+                                    <strong>Chickpeas</strong>
+                                    <small>Versatile legume for various dishes</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Tofu</strong>
-                                        <small>20g protein per cup</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-success me-2"></i>
+                                <div>
+                                    <strong>Tofu</strong>
+                                    <small>Soy-based protein alternative</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Quinoa</strong>
-                                        <small>8g protein per cup</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-success me-2"></i>
+                                <div>
+                                    <strong>Quinoa</strong>
+                                    <small>Complete protein with all amino acids</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Greek Yogurt</strong>
-                                        <small>20g protein per cup</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-success me-2"></i>
+                                <div>
+                                    <strong>Greek Yogurt</strong>
+                                    <small>High protein with probiotics</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Almonds</strong>
-                                        <small>6g protein per oz</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Edamame</strong>
-                                        <small>17g protein per cup</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-success"></i>
-                                        <strong>Chia Seeds</strong>
-                                        <small>5g protein per 2 tbsp</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-success me-2"></i>
+                                <div>
+                                    <strong>Almonds</strong>
+                                    <small>Protein-rich nuts with healthy fats</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Non-Vegetarian Sources -->
                 <div class="col-lg-6">
-                    <div class="protein-card shadow-sm">
-                        <div class="protein-header bg-danger">
-                            <h4 class="text-white mb-0">
+                    <div class="protein-card shadow-sm h-100">
+                        <div class="protein-header bg-danger text-white">
+                            <h5 class="mb-0">
                                 <i class="fas fa-drumstick-bite me-2"></i>Non-Vegetarian Sources
-                            </h4>
+                            </h5>
                         </div>
                         <div class="protein-body">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Chicken Breast</strong>
-                                        <small>31g protein per 100g</small>
-                                    </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-danger me-2"></i>
+                                <div>
+                                    <strong>Chicken Breast</strong>
+                                    <small>Lean source of high-quality protein</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Salmon</strong>
-                                        <small>25g protein per 100g</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-danger me-2"></i>
+                                <div>
+                                    <strong>Salmon</strong>
+                                    <small>Rich in omega-3 fatty acids and protein</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Turkey</strong>
-                                        <small>29g protein per 100g</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-danger me-2"></i>
+                                <div>
+                                    <strong>Turkey</strong>
+                                    <small>Lean meat high in protein</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Eggs</strong>
-                                        <small>6g protein per egg</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-danger me-2"></i>
+                                <div>
+                                    <strong>Eggs</strong>
+                                    <small>Versatile and affordable protein source</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Tuna</strong>
-                                        <small>30g protein per 100g</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-danger me-2"></i>
+                                <div>
+                                    <strong>Tuna</strong>
+                                    <small>Low in fat and high in protein</small>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Shrimp</strong>
-                                        <small>24g protein per 100g</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Lean Beef</strong>
-                                        <small>26g protein per 100g</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="protein-item">
-                                        <i class="fas fa-circle text-danger"></i>
-                                        <strong>Fish (General)</strong>
-                                        <small>20-25g protein per 100g</small>
-                                    </div>
+                            </div>
+                            <div class="protein-item">
+                                <i class="fas fa-circle text-danger me-2"></i>
+                                <div>
+                                    <strong>Lean Beef</strong>
+                                    <small>Provides essential nutrients and protein</small>
                                 </div>
                             </div>
                         </div>
@@ -601,57 +544,58 @@
                 <div class="col-lg-6">
                     <h2 class="display-5 fw-bold mb-4">About Our Calculator</h2>
                     <p class="lead mb-4">
-                        Our advanced maintenance calorie calculator uses scientifically proven formulas to provide accurate results tailored to your specific needs.
+                        Our maintenance calories calculator uses the scientifically proven Mifflin-St Jeor equation 
+                        to provide accurate BMR and calorie calculations tailored to your specific needs.
                     </p>
-                    <div class="feature-list">
-                        <div class="feature-item">
+                    
+                    <ul class="feature-list">
+                        <li class="feature-item">
                             <i class="fas fa-check-circle text-success me-3"></i>
-                            <span>Harris-Benedict Equation for BMR calculation</span>
-                        </div>
-                        <div class="feature-item">
+                            Accurate BMR calculations using proven formulas
+                        </li>
+                        <li class="feature-item">
                             <i class="fas fa-check-circle text-success me-3"></i>
-                            <span>Personalized workout plans based on availability</span>
-                        </div>
-                        <div class="feature-item">
+                            Personalized workout plans based on your schedule
+                        </li>
+                        <li class="feature-item">
                             <i class="fas fa-check-circle text-success me-3"></i>
-                            <span>Comprehensive macronutrient breakdown</span>
-                        </div>
-                        <div class="feature-item">
+                            Detailed macronutrient breakdown
+                        </li>
+                        <li class="feature-item">
                             <i class="fas fa-check-circle text-success me-3"></i>
-                            <span>Evidence-based nutrition recommendations</span>
-                        </div>
-                    </div>
+                            Comprehensive nutrition guidance
+                        </li>
+                        <li class="feature-item">
+                            <i class="fas fa-check-circle text-success me-3"></i>
+                            Free to use, no registration required
+                        </li>
+                    </ul>
                 </div>
+                
                 <div class="col-lg-6">
-                    <div class="about-stats">
-                        <div class="row g-4">
-                            <div class="col-6">
-                                <div class="stat-card text-center">
-                                    <i class="fas fa-users fa-2x text-primary mb-3"></i>
-                                    <h4 class="fw-bold">50,000+</h4>
-                                    <p class="text-muted">Active Users</p>
-                                </div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="stat-card text-center">
+                                <h3 class="text-primary fw-bold">50,000+</h3>
+                                <p class="mb-0">Happy Users</p>
                             </div>
-                            <div class="col-6">
-                                <div class="stat-card text-center">
-                                    <i class="fas fa-calculator fa-2x text-success mb-3"></i>
-                                    <h4 class="fw-bold">95%</h4>
-                                    <p class="text-muted">Accuracy Rate</p>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stat-card text-center">
+                                <h3 class="text-success fw-bold">95%</h3>
+                                <p class="mb-0">Accuracy Rate</p>
                             </div>
-                            <div class="col-6">
-                                <div class="stat-card text-center">
-                                    <i class="fas fa-dumbbell fa-2x text-warning mb-3"></i>
-                                    <h4 class="fw-bold">100+</h4>
-                                    <p class="text-muted">Workout Plans</p>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stat-card text-center">
+                                <h3 class="text-info fw-bold">24/7</h3>
+                                <p class="mb-0">Available</p>
                             </div>
-                            <div class="col-6">
-                                <div class="stat-card text-center">
-                                    <i class="fas fa-star fa-2x text-info mb-3"></i>
-                                    <h4 class="fw-bold">4.9/5</h4>
-                                    <p class="text-muted">User Rating</p>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stat-card text-center">
+                                <h3 class="text-warning fw-bold">Free</h3>
+                                <p class="mb-0">Always</p>
                             </div>
                         </div>
                     </div>
@@ -663,23 +607,18 @@
     <!-- Footer -->
     <footer class="bg-dark text-white py-5">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
+            <div class="row">
+                <div class="col-lg-6">
                     <h5 class="fw-bold mb-3">
                         <i class="fas fa-calculator me-2"></i>
                         Maintenance Calories Calculator
                     </h5>
-                    <p class="text-light">
-                        Your trusted companion for achieving fitness goals through accurate calorie calculation and personalized workout planning.
+                    <p class="text-light mb-4">
+                        Your trusted companion for accurate calorie calculations and personalized fitness planning. 
+                        Start your fitness journey today with science-backed calculations.
                     </p>
-                    <div class="social-links">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
-                    </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <h6 class="fw-bold mb-3">Quick Links</h6>
                     <ul class="list-unstyled">
                         <li><a href="#calculator" class="text-light text-decoration-none">Calculator</a></li>
@@ -688,38 +627,25 @@
                         <li><a href="#about" class="text-light text-decoration-none">About</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2">
-                    <h6 class="fw-bold mb-3">Resources</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-light text-decoration-none">Help Center</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Terms of Service</a></li>
-                        <li><a href="#" class="text-light text-decoration-none">Contact Support</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h6 class="fw-bold mb-3">Stay Updated</h6>
-                    <p class="text-light">Get the latest fitness tips and nutrition advice.</p>
-                    <div class="input-group">
-                        <input type="email" class="form-control" placeholder="Enter your email">
-                        <button class="btn btn-accent" type="button">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+                <div class="col-lg-3">
+                    <h6 class="fw-bold mb-3">Connect With Us</h6>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-youtube fa-lg"></i></a>
                     </div>
                 </div>
             </div>
             <hr class="my-4">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0 text-light">
-                        © 2024 Maintenance Calories Calculator. All Rights Reserved.
-                    </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-0 text-light">
-                        Made with <i class="fas fa-heart text-danger"></i> for your fitness journey
-                    </p>
-                </div>
+            <div class="text-center">
+                <p class="mb-0">
+                    &copy; 2024 Maintenance Calories Calculator. All Rights Reserved.
+                    <br>
+                    <small class="text-muted">
+                        This website provides tools to calculate maintenance calories and offers workout plans based on user preferences.
+                    </small>
+                </p>
             </div>
         </div>
     </footer>
@@ -728,6 +654,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+    <script src="static_script.js"></script>
 </body>
 </html>
