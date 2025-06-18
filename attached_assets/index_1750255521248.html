@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url("assets/rm314-bb-18.jpg");
+            background-size: cover;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Maintenance Calorie Calculator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div class="border rounded p-1">
+                        <a class="nav-link" href="#">Login / Sign Up</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <form id="calorieForm">
+            <div class="form-group">
+                <label for="height">Height (cm):</label>
+                <input type="number" class="form-control" id="height" required placeholder="Enter height">
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" class="form-control" id="weight" required placeholder="Enter weight">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" required placeholder="Enter age">
+            </div>
+            <div class="form-group">
+                <label for="activityLevel">Activity Level:</label>
+                <select class="form-control" id="activityLevel" aria-placeholder="Enter activity Level">
+                    <option value="1.2">Sedentary (Little to no exercise)</option>
+                    <option value="1.375">Lightly active (Light exercise/sports 1-3 days a week)</option>
+                    <option value="1.55">Moderately active (Moderate exercise/sports 3-5 days a week)</option>
+                    <option value="1.725">Very active (Hard exercise/sports 6-7 days a week)</option>
+                    <option value="1.9">Extra active (Very hard exercise/sports & physical job or 2x training)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+            <div class="form-group">
+                <label for="days">Number of Days Available for Gym:</label>
+                <input type="number" class="form-control" id="days" required placeholder="Enter number of days">
+            </div>
+            <div class="form-group">
+                <label for="hours">Number of Hours Available per Day:</label>
+                <input type="number" class="form-control" id="hours" required placeholder="Enter number of hours">
+            </div>
+            <button type="button" class="btn btn-success">Get Workout</button>
+        </form>
+        <div id="result" class="mt-4"></div>
+
+        <!-- Diet Information Section -->
+        <div class="mt-5">
+            <h3>Diet Information</h3>
+            <p>Keto Diet:
+                <br>
+
+                The ketogenic (keto) diet is a high-fat, low-carb diet that aims to induce ketosis, a metabolic state where your body burns fat for fuel instead of carbohydrates.
+                Food sources: Meat, fish, eggs, butter, cheese, nuts, seeds, avocados.
+                <br>
+                <br>
+                <br>
+                High-Carb Diet:
+                <br>
+                
+                A high-carb diet typically consists of a higher proportion of carbohydrates compared to fats and proteins.
+                Food sources: Whole grains (such as oats, quinoa, brown rice), fruits, vegetables, legumes (beans, lentils), potatoes.
+                <br>
+                <br>
+                <br>
+                Low-Carb Diet:
+                <br>
+
+                
+                A low-carb diet restricts carbohydrate intake, often for weight loss or blood sugar control.
+                Food sources: Non-starchy vegetables (leafy greens, broccoli, cauliflower), meat, fish, eggs, nuts, seeds, some fruits (berries in moderation).
+                <br>
+                <br>
+                <br>
+
+                Intermittent Fasting:
+                <br>
+
+                
+                Intermittent fasting involves cycling between periods of eating and fasting, with various methods like 16/8, where you fast for 16 hours and eat within an 8-hour window.
+                Food sources: During eating periods, focus on balanced meals with lean protein, healthy fats, and plenty of fruits and vegetables.</p>
+                
+                <br>
+            </div>
+
+
+        <!-- High-Protein Foods Section -->
+        <div class="mt-5">
+            <h3>High-Protein Foods</h3>
+            <p>Vegetarian Sources:
+                <br>
+                <br>
+
+                Lentils: A great source of protein and fiber.
+                <br>
+                Chickpeas: Versatile legume used in various dishes.
+                <br>
+                Tofu: Soy-based protein alternative.
+                <br>
+                Quinoa: High-protein grain with all essential amino acids.
+                <br>
+                Greek Yogurt: Contains probiotics and is high in protein.
+                <br>
+                Almonds: Protein-rich nuts with healthy fats.
+                <br>
+                Edamame: Young soybeans rich in protein and fiber.
+                <br>
+                Chia Seeds: Packed with protein, fiber, and omega-3 fatty acids.
+                <br>
+                Non-Vegetarian Sources:
+                <br>
+                <br>
+                
+                Chicken Breast: Lean source of protein.
+                <br>
+                Salmon: Rich in omega-3 fatty acids and protein.
+                <br>
+                Turkey: Lean meat high in protein.
+                <br>
+                Eggs: Versatile and affordable source of protein.
+                <br>
+                Tuna: Low in fat and high in protein.
+                <br>
+                Shrimp: Low in calories and high in protein.
+                <br>
+                Beef: Provides essential nutrients and protein.
+                <br></p>
+        </div>
+    </div>
+
+    <footer class="mt-5">
+        <div class="container">
+            <hr>
+            <p class="text-center">Copyright © 2024 Maintenance Calorie Calculator. All Rights Reserved.
+            <br>This website provides tools to calculate maintenance calories and offers workout plans based on user's preferences.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

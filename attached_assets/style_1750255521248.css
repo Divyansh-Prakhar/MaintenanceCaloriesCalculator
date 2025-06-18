@@ -1,0 +1,17 @@
+/* Body styles */
+body {
+    background-size: cover;
+    background-color: #f8f9fa;
+    
+}
+    
+
+/* Form styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Result styles */
+.alert {
+    margin-top: 20px;
+}
